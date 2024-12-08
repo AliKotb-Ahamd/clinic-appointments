@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>عيادة وادي النيل - حجز المواعيد</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <header class="fade-in">
+            <h1>عيادة وادي النيل</h1>
+            <p class="schedule-info">مواعيد العمل:</p>
+            <p>السبت: 10 صباحاً - 1 ظهراً</p>
+            <p>الإثنين: 10 صباحاً - 11 صباحاً</p>
+            <div class="weather-info">
+                <i class="fas fa-temperature-high weather-icon"></i>
+                <span id="weatherData">جاري تحميل معلومات الطقس...</span>
+            </div>
+        </header>
+
+        <div id="smartReminders" class="smart-reminder fade-in" style="display: none">
+            <!-- Dynamic reminders will be inserted here -->
+        </div>
+
+        <div class="appointment-section fade-in">
+            <div class="date-selector">
+                <h2>اختر اليوم</h2>
+                <select id="daySelect">
+                    <option value="">اختر يوم الحجز...</option>
+                </select>
+            </div>
+
+            <div class="time-slots">
+                <h2>المواعيد المتاحة</h2>
+                <div id="availableSlots" class="slots-grid"></div>
+            </div>
+        </div>
+
+        <div id="bookingForm" class="booking-form hidden fade-in">
+            <h2>تأكيد الحجز</h2>
+            <input type="text" id="patientName" placeholder="اسم المريض" required>
+            <input type="tel" id="patientPhone" placeholder="رقم الهاتف" required>
+            <input type="text" id="patientAge" placeholder="عمر المريض">
+            <select id="visitType">
+                <option value="">نوع الزيارة...</option>
+                <option value="first">زيارة أولى</option>
+                <option value="follow">متابعة</option>
+                <option value="emergency">حالة طارئة</option>
+            </select>
+            <textarea id="patientNotes" placeholder="ملاحظات إضافية"></textarea>
+            <div class="selected-time">
+                <p>الموعد المختار: <span id="selectedTime"></span></p>
+            </div>
+            <div class="form-buttons">
+                <button id="confirmBooking" class="primary-btn">
+                    <i class="fas fa-check"></i> تأكيد الحجز
+                </button>
+                <button id="cancelBooking" class="secondary-btn">
+                    <i class="fas fa-times"></i> إلغاء
+                </button>
+            </div>
+        </div>
+
+        <div class="appointments-list fade-in">
+            <h2>الحجوزات الحالية</h2>
+            <div class="appointments-filter">
+                <button class="filter-btn active" data-filter="all">الكل</button>
+                <button class="filter-btn" data-filter="today">اليوم</button>
+                <button class="filter-btn" data-filter="upcoming">القادمة</button>
+            </div>
+            <ul id="currentAppointments"></ul>
+            <div class="appointments-summary">
+                <p>إجمالي الحجوزات: <span id="totalAppointments">0</span></p>
+                <p>حجوزات اليوم: <span id="todayAppointments">0</span></p>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
