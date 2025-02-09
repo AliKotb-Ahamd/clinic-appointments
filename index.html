@@ -3,81 +3,135 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>عيادة وادي النيل - حجز المواعيد</title>
-    <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600&display=swap" rel="stylesheet">
+    <title>حجز العيادة</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Cairo', sans-serif;
+            background: linear-gradient(135deg, #1e90ff, #87cefa);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        .container {
+            background: #ffffff;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+            max-width: 400px;
+            width: 90%;
+            text-align: center;
+        }
+        h1 {
+            color: #1e90ff;
+            font-size: 24px;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+        .image-container {
+            width: 120px;
+            height: 120px;
+            overflow: hidden;
+            border-radius: 50%;
+            margin: 0 auto 20px;
+            border: 3px solid #1e90ff;
+        }
+        .image-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        a {
+            display: block;
+            text-decoration: none;
+            color: #ffffff;
+            background-color: #1e90ff;
+            padding: 12px 20px;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: bold;
+            margin: 15px 0;
+            box-shadow: 0 4px #1565c0; /* 3D shadow */
+            transition: all 0.2s ease;
+            text-align: center;
+        }
+        a:active {
+            box-shadow: 0 2px #1565c0; /* Adjust shadow on press */
+            transform: translateY(2px); /* Press effect */
+        }
+        a:hover {
+            background-color: #4682b4;
+            transform: scale(1.03);
+        }
+        .section-title {
+            font-size: 20px;
+            color: #1e90ff;
+            margin-top: 20px;
+            margin-bottom: 10px;
+            border-bottom: 2px solid #87cefa;
+            display: inline-block;
+            padding-bottom: 5px;
+        }
+        .map-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        .map-container p {
+            margin: 0;
+            color: #1e90ff;
+            font-size: 16px;
+            font-weight: bold;
+        }
+        .map-container a {
+            text-align: center;
+            width: 80%; /* Ensure the button is responsive */
+        }
+    </style>
 </head>
 <body>
     <div class="container">
-        <header class="fade-in">
-            <h1>عيادة وادي النيل</h1>
-            <p class="schedule-info">مواعيد العمل:</p>
-            <p>السبت: 10 صباحاً - 1 ظهراً</p>
-            <p>الإثنين: 10 صباحاً - 11 صباحاً</p>
-            <div class="weather-info">
-                <i class="fas fa-temperature-high weather-icon"></i>
-                <span id="weatherData">جاري تحميل معلومات الطقس...</span>
-            </div>
-        </header>
-
-        <div id="smartReminders" class="smart-reminder fade-in" style="display: none">
-            <!-- Dynamic reminders will be inserted here -->
+        <h1>مرحبًا بكم في عيادة أ.د. على قطب</h1>
+        <div class="image-container">
+            <img src="2021-09-09.jpg" alt="صورة الدكتور">
         </div>
 
-        <div class="appointment-section fade-in">
-            <div class="date-selector">
-                <h2>اختر اليوم</h2>
-                <select id="daySelect">
-                    <option value="">اختر يوم الحجز...</option>
-                </select>
-            </div>
+        <!-- Booking Section -->
+        <p class="section-title">حجز العيادة</p>
+        <a href="https://calendly.com/alikotb/neurosurgery" target="_blank">
+            <i class="fa fa-calendar-alt"></i> اضغط هنا للحجز
+        </a>
 
-            <div class="time-slots">
-                <h2>المواعيد المتاحة</h2>
-                <div id="availableSlots" class="slots-grid"></div>
-            </div>
-        </div>
+        <!-- WhatsApp Contacts Section -->
+        <p class="section-title">التواصل مع العيادة و العمليات</p>
+        <a href="https://wa.me/201014151508" target="_blank">
+            <i class="fab fa-whatsapp"></i> التواصل مع العيادة
+        </a>
+        <a href="https://wa.me/201090191039" target="_blank">
+            <i class="fab fa-whatsapp"></i> التواصل مع العمليات
+        </a>
 
-        <div id="bookingForm" class="booking-form hidden fade-in">
-            <h2>تأكيد الحجز</h2>
-            <input type="text" id="patientName" placeholder="اسم المريض" required>
-            <input type="tel" id="patientPhone" placeholder="رقم الهاتف" required>
-            <input type="text" id="patientAge" placeholder="عمر المريض">
-            <select id="visitType">
-                <option value="">نوع الزيارة...</option>
-                <option value="first">زيارة أولى</option>
-                <option value="follow">متابعة</option>
-                <option value="emergency">حالة طارئة</option>
-            </select>
-            <textarea id="patientNotes" placeholder="ملاحظات إضافية"></textarea>
-            <div class="selected-time">
-                <p>الموعد المختار: <span id="selectedTime"></span></p>
-            </div>
-            <div class="form-buttons">
-                <button id="confirmBooking" class="primary-btn">
-                    <i class="fas fa-check"></i> تأكيد الحجز
-                </button>
-                <button id="cancelBooking" class="secondary-btn">
-                    <i class="fas fa-times"></i> إلغاء
-                </button>
-            </div>
-        </div>
+        <!-- Wadi El Nile Section -->
+        <p class="section-title">حجز وادي النيل</p>
+        <a href="https://calendly.com/alikotb/wadi" target="_blank">
+            <i class="fa fa-hospital"></i> اضغط هنا للحجز
+        </a>
+        <a href="https://wa.me/201156222123" target="_blank">
+            <i class="fab fa-whatsapp"></i> التواصل لحجز العمليات
+        </a>
 
-        <div class="appointments-list fade-in">
-            <h2>الحجوزات الحالية</h2>
-            <div class="appointments-filter">
-                <button class="filter-btn active" data-filter="all">الكل</button>
-                <button class="filter-btn" data-filter="today">اليوم</button>
-                <button class="filter-btn" data-filter="upcoming">القادمة</button>
-            </div>
-            <ul id="currentAppointments"></ul>
-            <div class="appointments-summary">
-                <p>إجمالي الحجوزات: <span id="totalAppointments">0</span></p>
-                <p>حجوزات اليوم: <span id="todayAppointments">0</span></p>
-            </div>
+        <!-- Location Section -->
+        <div class="map-container">
+            <p>مكان العيادة:</p>
+            <a href="https://maps.app.goo.gl/kneM2xHcoW8rMNJ5A?g_st=iw" target="_blank">
+                <i class="fa fa-map-marker-alt"></i> عرض الموقع
+            </a>
         </div>
     </div>
-    <script src="script.js"></script>
 </body>
 </html>
